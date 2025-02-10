@@ -2,20 +2,26 @@ import TdClient from 'tdweb_1.8.44/dist/tdweb';
 import {config} from './config.js'
 import './style.css'
 
-let client = null
-
+let client = new TdClient({
+  readOnly: false,
+  logVerbosityLevel: 0,
+  fastUpdating: true,
+  jsLogVerbosityLevel: 0,
+  useDatabase: false,
+  mode: 'wasm',
+  isBackground: false,
+})
 
 async function send(request) {
   console.log('send request: ', request)
-  const res = await client.send(request)
-  return res
+  client.send(request)
 }
-
+/*
   client = new TdClient({
     readOnly: false,
-    logVerbosityLevel: 2,
+    logVerbosityLevel: 0,
     fastUpdating: true,
-    jsLogVerbosityLevel: 3,
+    jsLogVerbosityLevel: 0,
     useDatabase: false,
     mode: 'wasm',
     isBackground: false,
@@ -23,6 +29,7 @@ async function send(request) {
   const lstr = send({
     '@type': 'setLogStream'
   })
+    */
     /*
   await send({
     '@type': 'close'
@@ -110,31 +117,23 @@ async function send(request) {
     console.log('client: ', client)
 
 
-document.querySelector('#sendNumberButton').addEventListener('click', async () => {
+document.querySelector('#sendNumberButton').addEventListener('click', () => {
   const phoneNumber = document.querySelector('#phoneInput').value
-  await send({
+  send({
     '@type': 'setAuthenticationPhoneNumber',
     phone_number: phoneNumber,
-    allow_flash_call: true,
-    is_current_phone_number: true,
-    _: {
-      '@type': 'authenticationSettings',
-      allow_flash_call: true,
-      is_current_phone_number: true,
-    }
-
   })
 })
 
-document.querySelector('#logoutButton').addEventListener('click', async () => {
-  await send({
+document.querySelector('#logoutButton').addEventListener('click', () => {
+  send({
     '@type': 'destroy'
   })
 })
 
-document.querySelector('#sendCodeButton').addEventListener('click', async (event) => {
+document.querySelector('#sendCodeButton').addEventListener('click', () => {
   const code = document.querySelector('#codeInput').value
-  await send({
+  send({
     '@type': 'checkAuthenticationCode',
     code: code
   })
