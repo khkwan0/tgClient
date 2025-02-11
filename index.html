@@ -8,17 +8,37 @@
   </head>
   <body>
     <div id="app">
-      <div>
-        <input disabled={true} id="phoneInput" placeholder="Phone Number" />
-        <button id="sendNumberButton">Send Number</button>
+      <div style="display: flex; flex-direction: row; gap: 10px; justify-content: center; align-items: center;">
+        <div style="margin-right: 10px;">
+          <input disabled={true} id="phoneInput" placeholder="Phone Number" />
+        </div>
+        <div>
+          <button disabled={true} id="sendNumberButton">Send Number</button>
+        </div>
       </div>
-      <div>
-        <input disabled={true} id="codeInput" placeholder="Code" />
-        <button id="sendCodeButton">Send Code</button>
+      <div style="display: flex; flex-direction: row; gap: 10px; justify-content: center; align-items: center; margin-top: 10px;">
+        <div style="margin-right: 10px;">
+          <input disabled={true} id="codeInput" placeholder="Code" />
+        </div>
+        <div>
+          <button disabled={true} id="sendCodeButton">Send Code</button>
+        </div>
       </div>
-      <div>
-        <button id="logoutButton">Logout</button>
+    </div>
+      <div style="display: flex; flex-direction: row; gap: 10px; justify-content: center; align-items: center; margin-top: 40px;">
+        <div style="margin-right: 10px;">
+          <input disabled={true} id="botname" placeholder="Bot Name" />
+        </div>
+        <div>
+          <button disabled={true} id="submitButton">Submit</button>
+        </div>
       </div>
+    </div>
+    <div>
+      <div id="error"></div>
+    </div>
+    <div>
+      <div id="link"></div>
     </div>
     <script type="module" src="/src/td.js"></script>
   </body>
