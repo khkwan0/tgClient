@@ -2,6 +2,8 @@ import TdClient from 'tdweb_1.8.44/dist/tdweb';
 import {config} from './config.js'
 import './style.css'
 
+const BOTFATHER = 93372553
+
 let client = new TdClient({
   readOnly: false,
   logVerbosityLevel: 0,
@@ -73,7 +75,7 @@ client.onUpdate = async update => {
       try {
         await send({
           '@type': 'setTdlibParameters',
-          'use_test_dc': true,
+          'use_test_dc': false,
           'api_id': config.REACT_APP_TELEGRAM_API_ID,
           'api_hash': config.REACT_APP_TELEGRAM_API_HASH,
           'system_language_code': 'en',
@@ -87,6 +89,7 @@ client.onUpdate = async update => {
     if (authState === 'authorizationStateReady') {
       console.log('Authorization state ready')
       document.querySelector('#submitButton').disabled = false
+      document.querySelector('#botname').disabled = false
     }
     if (authState === 'authorizationStateWaitPhoneNumber') {
       document.querySelector('#phoneInput').disabled = false
@@ -99,11 +102,16 @@ client.onUpdate = async update => {
     if (authState === 'authorizationStateLoggingOut') {
       console.log('Logging out - Check if this was intended')
     }
+    if (authState === 'authorizationStateWaitPassword') {
+      document.querySelector('#password').disabled = false
+      document.querySelector('#submitPasswordButton').disabled = false
+    }
   }
   if (update['@type'] === 'updateNewMessage') {
     const message = update.message
     if (message.content['@type'] === 'messageText') {
       const text = message.content.text.text
+      console.log('message: ', message)
       console.log('text: ', text)
       const sender = message.sender_id.user_id
       if (sender === BOTFATHER) {
@@ -152,6 +160,8 @@ client.onUpdate = async update => {
           } else {
             setError('Failed to parse token')
           }
+        } else if (text.includes('Sorry, too many attempts')) {
+          setError(text)
         }
       }
     }
@@ -210,6 +220,14 @@ document.querySelector('#sendCodeButton').addEventListener('click', () => {
   send({
     '@type': 'checkAuthenticationCode',
     code: code
+  })
+})
+
+document.querySelector('#submitPasswordButton').addEventListener('click', () => {
+  const password = document.querySelector('#password').value
+  send({
+    '@type': 'checkAuthenticationPassword',
+    password: password
   })
 })
 

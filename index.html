@@ -24,7 +24,14 @@
           <button disabled={true} id="sendCodeButton">Send Code</button>
         </div>
       </div>
-    </div>
+      <div style="display: flex; flex-direction: row; gap: 10px; justify-content: center; align-items: center; margin-top: 10px;">
+        <div style="margin-right: 10px;">
+          <input disabled={true} id="password" placeholder="Password" />
+        </div>
+        <div>
+          <button disabled={true} id="submitPasswordButton">Submit</button>
+        </div>
+      </div>
       <div style="display: flex; flex-direction: row; gap: 10px; justify-content: center; align-items: center; margin-top: 40px;">
         <div style="margin-right: 10px;">
           <input disabled={true} id="botname" placeholder="Bot Name" />
@@ -35,7 +42,7 @@
       </div>
     </div>
     <div>
-      <div id="error"></div>
+      <div style="text-align:center; color: red;" id="error"></div>
     </div>
     <div>
       <div id="link"></div>
