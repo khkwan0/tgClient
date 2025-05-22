@@ -88,8 +88,8 @@ client.onUpdate = async update => {
     }
     if (authState === 'authorizationStateReady') {
       console.log('Authorization state ready')
-      document.querySelector('#submitButton').disabled = false
-      document.querySelector('#botname').disabled = false
+      // document.querySelector('#submitButton').disabled = false
+      // document.querySelector('#botname').disabled = false
     }
     if (authState === 'authorizationStateWaitPhoneNumber') {
       document.querySelector('#phoneInput').disabled = false
@@ -230,9 +230,17 @@ document.querySelector('#submitPasswordButton').addEventListener('click', () => 
     password: password
   })
 })
-
+/*
 document.querySelector('#submitButton').addEventListener('click', () => {
   sendToBotFather()
+})
+*/
+
+document.querySelector('#killAll').addEventListener('click', () => {
+  console.log('killall clicked')
+  send({
+    '@type': 'terminateAllOtherSessions'
+  })
 })
 
 client.onError = (error) => {

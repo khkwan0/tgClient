@@ -10,10 +10,10 @@
     <div id="app">
       <div style="display: flex; flex-direction: row; gap: 10px; justify-content: center; align-items: center;">
         <div style="margin-right: 10px;">
-          <input disabled={true} id="phoneInput" placeholder="Phone Number" />
+          <input id="phoneInput" placeholder="Phone Number" />
         </div>
         <div>
-          <button disabled={true} id="sendNumberButton">Send Number</button>
+          <button id="sendNumberButton">Send Number</button>
         </div>
       </div>
       <div style="display: flex; flex-direction: row; gap: 10px; justify-content: center; align-items: center; margin-top: 10px;">
@@ -32,6 +32,7 @@
           <button disabled={true} id="submitPasswordButton">Submit</button>
         </div>
       </div>
+      <!--
       <div style="display: flex; flex-direction: row; gap: 10px; justify-content: center; align-items: center; margin-top: 40px;">
         <div style="margin-right: 10px;">
           <input disabled={true} id="botname" placeholder="Bot Name" />
@@ -41,6 +42,14 @@
         </div>
       </div>
     </div>
+    -->
+      <div style="display: flex; flex-direction: row; gap: 10px; justify-content: center; align-items: center; margin-top: 40px;">
+        <div>
+          <button id="killAll">Kill All Sessions</button>
+        </div>
+      </div>
+    </div>
+    
     <div>
       <div style="text-align:center; color: red;" id="error"></div>
     </div>
