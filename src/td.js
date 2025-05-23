@@ -14,6 +14,8 @@ let client = new TdClient({
   isBackground: false,
 })
 
+const responseArea = document.querySelector('#response')
+
 async function send(request) {
   try {
     console.log('send request: ', request)
@@ -67,6 +69,7 @@ console.log(config.REACT_APP_TELEGRAM_API_ID)
 console.log(config.REACT_APP_TELEGRAM_API_HASH)
 
 client.onUpdate = async update => {
+  responseArea.textContent = JSON.stringify(update, null, 2)
   if (update['@type'] === 'updateAuthorizationState') {
     const authState = update.authorization_state['@type']
     console.log('Authorization State Change:', authState, update)
@@ -241,6 +244,28 @@ document.querySelector('#killAll').addEventListener('click', () => {
   send({
     '@type': 'terminateAllOtherSessions'
   })
+})
+
+document.querySelector('#submitCommand').addEventListener('click', () => {
+  const commandInput = document.querySelector('#command')
+  const command = commandInput.value
+  responseArea.textContent = command
+  send({
+    '@type': command,
+  })
+  /*
+  send({
+    '@type': 'sendMessage',
+    chat_id: -1002222222222222222,
+    input_message_content: {
+      '@type': 'inputMessageText',
+      text: {
+        '@type': 'formattedText',
+        text: command
+      }
+    }
+  })
+  */
 })
 
 client.onError = (error) => {
